@@ -1,11 +1,16 @@
 @Repository
 @RequiredArgsConstructor
-public class OrderRepositoryV0 {
+public class OrderRepositoryV5 {
+	private final TraceTemplate template;
+
 	public void save(String itemId) throws Exception {
-		//저장 로직
-		if (itemId.equals("ex")) {
-			throw new IllegalStateException("예외 발생!");
-		}
-		Thread.sleep(1000); // 저장에는 1초가 소요되는 로직이 있다고 가정한다. 이후에 나오는 모든 Sleep도 로직에 소요되는 시간이라고 가정.
+		template.execute("OrderRepository.save()", () -> {
+			//저장 로직
+			if (itemId.equals("ex")) {
+				throw new IllegalStateException("예외 발생!");
+			}
+			Thread.sleep(1000);
+			return null;
+		});
 	}
 }
