@@ -1,0 +1,3 @@
+public interface TraceCallback<T> {
+	T call();
+}
