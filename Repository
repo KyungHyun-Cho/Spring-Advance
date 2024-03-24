@@ -10,7 +10,7 @@ public class OrderRepositoryV1 {
 			//저장 로직
 			if (itemId.equals("ex")) {
 				throw new IllegalStateException("예외 발생!");
-            }
+            		}
 			Thread.sleep(1000);
 			trace.end(status);
 		} catch (Exception e) {
