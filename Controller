@@ -1,19 +1,17 @@
 @RestController
 @RequiredArgsConstructor
-public class OrderControllerV4 {
-	private final OrderServiceV4 orderService;
-	private final LogTrace trace;
+public class OrderControllerV5 {
+	private final OrderServiceV5 orderService;
+	private final TraceTemplate template;
 
-	@GetMapping("/v4/request")
+	@GetMapping("/v5/request")
 	public String request(String itemId) {
-		AbstractTemplate<String> template = new AbstractTemplate<>(trace) {
+		return template.execute("OrderController.request()", new TraceCallback<>() {
 			@Override
-			protected String call() {
+			public String call() {
 				orderService.orderItem(itemId);
 				return "ok";
 			}
-		};
-
-		return template.execute("OrderController.request()");
+		});
 	}
 }
