@@ -1,11 +1,21 @@
 @Repository
 @RequiredArgsConstructor
-public class OrderRepositoryV0 {
-	public void save(String itemId) throws Exception {
-		//저장 로직
-		if (itemId.equals("ex")) {
-			throw new IllegalStateException("예외 발생!");
+public class OrderRepositoryV1 {
+	private final HelloTraceV1 trace;
+
+	public void save(String itemId) throws Exception{
+		TraceStatus status = null;
+		try {
+			status = trace.begin("OrderRepository.save()");
+			//저장 로직
+			if (itemId.equals("ex")) {
+				throw new IllegalStateException("예외 발생!");
+            		}
+			Thread.sleep(1000);
+			trace.end(status);
+		} catch (Exception e) {
+			trace.exception(status, e);
+			throw e;
 		}
-		Thread.sleep(1000); // 저장에는 1초가 소요되는 로직이 있다고 가정한다. 이후에 나오는 모든 Sleep도 로직에 소요되는 시간이라고 가정.
 	}
 }
