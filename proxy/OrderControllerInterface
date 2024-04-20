@@ -1,1 +1,10 @@
+// Spring 3.0 미만에서만 정상 동작
+@RequestMapping //스프링은 @Controller 또는 @RequestMapping 이 있어야 스프링 컨트롤러로 인식
+@ResponseBody // ResponseBody 어노테이션은 인터페이스에 사용해도 된다.
+public interface OrderControllerV1 {
+    @GetMapping("/v1/request")
+    String request(@RequestParam("itemId") String itemId);
 
+    @GetMapping("/v1/no-log")
+    String noLog();
+}
