@@ -1,1 +1,12 @@
+public class OrderServiceConcrete {
+    private final OrderRepositoryConcrete orderRepository;
+
+    public OrderServiceConcrete(OrderRepositoryConcrete orderRepository) {
+        this.orderRepository = orderRepository;
+    }
+
+    public void orderItem(String itemId) {
+        orderRepository.save(itemId);
+    }
+}
 
