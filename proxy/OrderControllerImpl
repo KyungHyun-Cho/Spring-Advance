@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 public class OrderControllerImpl implements OrderControllerInterface {
     private final OrderServiceInterface orderService;
 
-    public OrderControllerV1Impl(OrderServiceInterface orderService) {
+    public OrderControllerImpl(OrderServiceInterface orderService) {
         this.orderService = orderService;
     }
 
