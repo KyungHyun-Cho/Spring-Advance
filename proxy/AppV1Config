@@ -1,0 +1,20 @@
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class AppV1Config {
+    @Bean
+    public OrderControllerInterface orderControllerInterface() {
+        return new OrderControllerImpl(orderServiceInterface());
+    }
+
+    @Bean
+    public OrderServiceInterface orderServiceInterface() {
+        return new OrderServiceImpl(orderRepositoryInterface());
+    }
+
+    @Bean
+    public OrderRepositoryInterface orderRepositoryInterface() {
+        return new OrderRepositoryImpl();
+    }
+}
