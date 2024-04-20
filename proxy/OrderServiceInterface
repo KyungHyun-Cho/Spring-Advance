@@ -1,1 +1,3 @@
-
+public interface OrderServiceInterface {
+    void orderItem(String itemId);
+}
