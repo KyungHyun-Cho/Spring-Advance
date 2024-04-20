@@ -1,1 +1,3 @@
-
+public interface OrderRepositoryInterface {
+    void save(String itemId);
+}
