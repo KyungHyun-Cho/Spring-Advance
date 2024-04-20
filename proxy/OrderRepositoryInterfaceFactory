@@ -1,0 +1,25 @@
+import hello.proxy.app.v1.OrderRepositoryInterface;
+import hello.proxy.trace.TraceStatus;
+import hello.proxy.trace.logtrace.LogTrace;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+public class OrderRepositoryInterfaceProxy implements OrderRepositoryInterface {
+
+    private final OrderRepositoryInterface target;
+    private final LogTrace logTrace;
+
+    @Override
+    public void save(String itemId) {
+        TraceStatus status = null;
+        try {
+            status = logTrace.begin("OrderRepository.save()");
+            //target 호출
+            target.save(itemId);
+            logTrace.end(status);
+        } catch (Exception e) {
+            logTrace.exception(status, e);
+            throw e;
+        }
+    }
+}
